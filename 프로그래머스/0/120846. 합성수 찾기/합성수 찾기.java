@@ -1,25 +1,17 @@
 class Solution {
-    public int solution(int n) {
-        int count = 0;
-        
-        for (int i = 1; i <= n; i++) {
-            if (isComposite(i)) {
-                count++;
+    public int solution (int n){
+        int[] num = new int[n+1];
+        int answer = 0;
+        for (int i = 1; i <= n; i++){              // i의 약수의 개수 count를 위해서
+            for (int j = i; j <= n; j += i){       // 해당 i의 배수를 파악하고
+                num[j]++;                          // 그에 맞게 count 증가
             }
         }
-        
-        return count;
-    }
-    
-    // 합성수 판별 함수
-    private boolean isComposite(int x) {
-        if (x <= 3) return false; // 1,2,3은 합성수 X
-        
-        for (int i = 2; i * i <= x; i++) {
-            if (x % i == 0) {
-                return true; // 약수가 있으면 합성수
+        for (int i = 1; i <= n; i++){
+            if (num[i] >=3){
+                answer++;
             }
         }
-        return false; // 나눠지는 수 없으면 소수
+        return answer; 
     }
 }
